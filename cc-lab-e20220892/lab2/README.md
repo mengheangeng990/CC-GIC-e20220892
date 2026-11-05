@@ -67,12 +67,14 @@ About how many minutes passed between stopping `httpd` and the new instance beco
    -> The Auto Scaling group replaced the failed instance. The target group checks instance health and reports unhealthy targets. The load balancer sends requests to healthy targets. The Auto Scaling group launches a replacement instance.
 
 4. With desired 2, minimum 2 and maximum 3, how many instances run normally? In what situation could there be 3?
-   ->
+   ->Normally, 2 instances run because the desired and minimum capacities are both 2. There can be 3 instances temporarily during a replacement or when the group scales out, up to the maximum capacity of 3.
 
 5. The instances' security group allows HTTP from anywhere. How could you change it so that the instances accept HTTP **only** from the load balancer?
-   ->
+   ->Change the inbound HTTP rule in LaunchTemplateSecurityGroup. Instead of allowing HTTP from Anywhere-IPv4, set the source to LoadBalancerSecurityGroup. This allows only the load balancer to access the instances through HTTP.
 
 ## Problems and how I solved them (optional)
+
+No major problems occurred during this lab. I followed the AWS instructions and checked the target health status while testing the load balancer and Auto Scaling group.
 
 ## AI note (optional)
 
@@ -80,7 +82,7 @@ One suggestion an AI tool gave you and how you checked it.
 
 ## Clean up
 
-- [ ] `MyAutoScalingGroup` deleted and its instances terminated.
-- [ ] `AutoScalingLaunchTemplate` deleted.
-- [ ] `MyLoadBalancer` and `LoadBalancerTargetGroup` deleted.
-- [ ] Both security groups deleted.
+- [ Done ] `MyAutoScalingGroup` deleted and its instances terminated.
+- [ Done ] `AutoScalingLaunchTemplate` deleted.
+- [ Done ] `MyLoadBalancer` and `LoadBalancerTargetGroup` deleted.
+- [ Done ] Both security groups deleted.
